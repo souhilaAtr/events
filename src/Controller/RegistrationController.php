@@ -11,6 +11,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
+use Symfony\Component\Security\Core\User\UserInterface;
 
 class RegistrationController extends AbstractController
 {
@@ -27,7 +28,13 @@ class RegistrationController extends AbstractController
 
             // encode the plain password
             $user->setPassword($userPasswordHasher->hashPassword($user, $plainPassword));
+            $imagefile = $form->get('avatar')->getData();
 
+            if ($imagefile) {
+                $newfilename = "profil" . uniqid() . "." . $imagefile->guessExtension();
+                $imagefile->move($this->getParameter('dossierImage'), $newfilename);
+                $user->setAvatar($newfilename);
+            }
             $entityManager->persist($user);
             $entityManager->flush();
 
@@ -38,6 +45,14 @@ class RegistrationController extends AbstractController
 
         return $this->render('registration/register.html.twig', [
             'registrationForm' => $form,
+        ]);
+    }
+    #[Route('/profil', name: "app_profil")]
+    public function profil(UserInterface $user)
+    {
+      
+        return $this->render('registration/profil.html.twig',[
+            'utilisateur' => $user
         ]);
     }
 }

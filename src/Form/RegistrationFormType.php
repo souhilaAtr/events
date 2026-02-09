@@ -5,6 +5,7 @@ namespace App\Form;
 use App\Entity\Utilisateur;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
+use Symfony\Component\Form\Extension\Core\Type\FileType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
@@ -20,6 +21,10 @@ class RegistrationFormType extends AbstractType
             ->add('nom')
             ->add('prenom')
             ->add('email')
+            ->add('avatar', FileType::class, [
+                'data_class' => null,
+                'required' => false
+            ])
             ->add('agreeTerms', CheckboxType::class, [
                 'mapped' => false,
                 'constraints' => [
@@ -39,7 +44,7 @@ class RegistrationFormType extends AbstractType
                     ),
                     new Length(
                         min: 6,
-                        minMessage : 'Your password should be at least {{ limit }} characters',
+                        minMessage: 'Your password should be at least {{ limit }} characters',
                         // max length allowed by Symfony for security reasons
                         max: 4096,
                     ),

@@ -1,0 +1,46 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+<div class="card mb-3" style="width: 50%; margin:auto">
+    <h3 class="card-header">mon profile</h3>
+    <div class="card-body">
+        <h5 class="card-title">{{utilisateur.nom}}{{utilisateur.nom}}</h5>
+        <h6 class="card-subtitle text-muted">------</h6>
+    </div>
+    {% if utilisateur.avatar == null %}
+    <svg width="80px" height="80px" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg" fill="#000000">
+        <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+        <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+        <g id="SVGRepo_iconCarrier">
+            <path
+                d="m 8 1 c -1.65625 0 -3 1.34375 -3 3 s 1.34375 3 3 3 s 3 -1.34375 3 -3 s -1.34375 -3 -3 -3 z m -1.5 7 c -2.492188 0 -4.5 2.007812 -4.5 4.5 v 0.5 c 0 1.109375 0.890625 2 2 2 h 8 c 1.109375 0 2 -0.890625 2 -2 v -0.5 c 0 -2.492188 -2.007812 -4.5 -4.5 -4.5 z m 0 0"
+                fill="#2e3436"></path>
+        </g>
+    </svg>
+    {% else %}
+    <img src="{{asset('dossierImage/' ~ utilisateur.avatar)}}" alt="">
+    {% endif %}
+   
+    <ul class="list-group list-group-flush">
+        <li class="list-group-item">{{utilisateur.email}}</li>
+    
+    </ul>
+    <div class="card-body">
+        <a href="#" class="card-link">modifier mon profile</a>
+        <a href="#" class="card-link">supprimer mon profile</a>
+    </div>
+    <div class="card-footer text-muted">
+        2 days ago
+    </div>
+</div>
+{# <div class="card">
+    <div class="card-body">
+        <h4 class="card-title">Card title</h4>
+        <h6 class="card-subtitle mb-2 text-muted">Card subtitle</h6>
+        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's
+            content.</p>
+        <a href="#" class="card-link">Card link</a>
+        <a href="#" class="card-link">Another link</a>
+    </div>
+</div> #}
+{% endblock %}
