@@ -43,7 +43,7 @@ final class EvenementController extends AbstractController
             ]);
     }
 
-    #[Route('/evenement/edit/{id}', name: 'edit_evenet')]
+    #[Route('/evenement/{id}/edit', name: 'edit_evenet')]
     public function edit(Request $request, EntityManagerInterface $entityManager, Evenement $evenement)
     {
         // $evenement = new Evenement();
@@ -58,9 +58,18 @@ final class EvenementController extends AbstractController
         return $this->render('evenement/edit.html.twig', [
             'formevement' => $form
         ]);
+
+       
+
     }
 
 
-
+    #[Route('evenement/{id}/delete', name: 'delete_event')]
+    public function delete(EntityManagerInterface $entityManager, Evenement $evenement)
+    {
+        $entityManager->remove($evenement);
+        $entityManager->flush();
+        return $this->redirectToRoute('app_evenement');
+    }
 
 }

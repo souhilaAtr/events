@@ -24,13 +24,20 @@
             <td>{{evenement.datefin|date("m/d/Y", "Europe/Paris")}}</td>
             <td>{{evenement.lieu}}</td>
             <td>
-                <a href="{{path('affiche_event',{'id':evenement.id} )}}">afficher mon evenement</a>
-            </td>
+                <a href="{{path('affiche_event',{'id':evenement.id} )}}" class="btn btn-success">afficher </a>
+                {% if is_granted('ROLE_USER') %}
+                      
+                        <a href="{{path('edit_evenet',{'id':evenement.id} )}}" class="btn btn-primary">modifier</a>
+                        <a href="{{path('delete_event',{'id':evenement.id} )}}" class="btn btn-primary">supprimer</a>
+                {% endif %}
+             </td>
         </tr>
         {% endfor %}
        
-      
-     
+    
     </tbody>
 </table>
+
+<a href="{{path('new_evenet')}}"> ajouter un evenement</a>
+<a href=""> retour au profil </a>
 {% endblock %}
