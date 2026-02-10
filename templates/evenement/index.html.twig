@@ -17,7 +17,7 @@
     </thead>
     <tbody>
         {% for evenement in evenements %}
-             <tr class="table-warning">
+        <tr class="table-warning">
             <th scope="row">{{evenement.titre}}</th>
             <td>{{evenement.description}}</td>
             <td>{{evenement.datedebut|date("m/d/Y", "Europe/Paris")}}</td>
@@ -26,18 +26,20 @@
             <td>
                 <a href="{{path('affiche_event',{'id':evenement.id} )}}" class="btn btn-success">afficher </a>
                 {% if is_granted('ROLE_USER') %}
-                      
-                        <a href="{{path('edit_evenet',{'id':evenement.id} )}}" class="btn btn-primary">modifier</a>
-                        <a href="{{path('delete_event',{'id':evenement.id} )}}" class="btn btn-primary">supprimer</a>
+
+                <a href="{{path('edit_evenet',{'id':evenement.id} )}}" class="btn btn-primary">modifier</a>
+                <a href="{{path('delete_event',{'id':evenement.id} )}}" class="btn btn-primary">supprimer</a>
                 {% endif %}
-             </td>
+            </td>
         </tr>
         {% endfor %}
-       
-    
+
+
     </tbody>
 </table>
 
 <a href="{{path('new_evenet')}}"> ajouter un evenement</a>
 <a href=""> retour au profil </a>
+
+
 {% endblock %}
